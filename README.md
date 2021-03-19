@@ -1,6 +1,6 @@
-# SystemControlReport
+# System Control Report
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
+This project ia a Web App is a platform for status’ management, distribution and logistics of each report of the Reporting & Analytics department
 
 ## Development server
 
