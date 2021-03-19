@@ -1,0 +1,76 @@
+<MainHeader></MainHeader>
+<section class="container py-3 w-100">
+  <SideMenu></SideMenu>
+  <hr />
+  <div class="container-fluid my-2 bg-white-50 p-0">
+    <div class="text-center text-font-base pt-2">
+      <h2 class="m-0"><i class="fas fa-network-wired"></i> Computers</h2>
+      <p class="subtitle mb-2">Manage of the Reporting Servers</p>
+    </div>
+    <div class="text-font-base">
+      <a title="Add Computer" class="btn btn-light btn-outline-dark text-black mr-2 my-2"
+        style="text-decoration: none; cursor: pointer;" (click)="open(ModelAddNew)">
+        <i class="fas fa-plus-square fa-1x"></i> Add Computer
+      </a>
+      <ng-template #ModelAddNew let-c="close" let-d="dismiss">
+        <div class="modal-header p-0 bg-dark">
+          <div class="col text-center">
+            <h3 class="mx-0 my-2 text-white text-font-base">New Computer</h3>
+          </div>
+        </div>
+        <div class="modal-body">
+          <ComputerUpsert></ComputerUpsert>
+          <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Close');ngOnInit();">CLOSE</button>
+        </div>
+      </ng-template>
+    </div>
+    <div class="text-font-base">
+      <table class="table table-responsive table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Computer Name</th>
+            <th>IP Address</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of CompList">
+            <td class="align-middle">{{item.ComputerName}}</td>
+            <td class="align-middle">{{item.IPAddress}}</td>
+            <td class="align-middle {{item.Status? 'text-success': 'text-danger'}}" *ngIf="item.Status">
+              <a (click)="ChangeStatus(item.ComputerID)" nz-tooltip nzTooltipTitle="Disable?" nzTooltipColor="Red"
+                nzTooltipPlacement="top">
+                <i class="fas fa-check-circle fa-1x"></i> Active
+              </a>
+            </td>
+            <td class="align-middle {{item.Status? 'text-success': 'text-danger'}}" *ngIf="!item.Status">
+              <a (click)="ChangeStatus(item.ComputerID)" nz-tooltip nzTooltipTitle="Enable?" nzTooltipColor="Green"
+                nzTooltipPlacement="top">
+                <i class="fas fa-times-circle fa-1x"></i> Inactive
+              </a>
+            </td>
+            <td class="text-center">
+              <a nz-tooltip nzTooltipTitle="Edit" nzTooltipColor="Green" nzTooltipPlacement="top" style="text-decoration: none; cursor: pointer;"
+                (click)="open(ModelEdit)">
+                <i class="fas fa-edit fa-15x"></i>
+              </a>
+              <ng-template #ModelEdit let-c="close" let-d="dismiss">
+                <div class="modal-header p-0 bg-dark">
+                  <div class="col text-center">
+                    <h3 class="mx-0 my-2 text-white text-font-base">Edit Info</h3>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <ComputerUpsert [ComputerDetail]="item"></ComputerUpsert>
+                  <button type="button" class="btn btn-outline-dark btn-block"
+                    (click)="c('Close');ngOnInit();">CLOSE</button>
+                </div>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

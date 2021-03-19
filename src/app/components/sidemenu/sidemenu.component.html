@@ -1,0 +1,11 @@
+<nz-breadcrumb class="breadcrumb p-2">
+  <nz-breadcrumb-item>
+    <a class="text-font-base" routerLink="/Home">Home</a>
+  </nz-breadcrumb-item>  
+  <nz-breadcrumb-item *ngIf="CurrentPage.AppName">
+    <a class="text-font-base">{{CurrentPage.MainClass}}</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngIf="CurrentPage.AppName">
+    <a class="text-font-base" routerLink="/{{CurrentPage.Controller}}/{{CurrentPage.Page}}/{{CurrentPage.Parameter}}">{{CurrentPage.AppName}}</a>
+  </nz-breadcrumb-item>  
+</nz-breadcrumb>

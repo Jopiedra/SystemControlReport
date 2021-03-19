@@ -1,0 +1,30 @@
+<MainHeader></MainHeader>
+<section class="px-5 py-3 w-100">
+  <SideMenu></SideMenu>
+  <hr />
+  <div class="row row-cols-4 text-font-base">
+      <div class="col p-0" *ngFor="let item of Directory">        
+        <nz-card [nzTitle]="Title" class="m-1">
+            <ng-container *ngFor="let src of item.Directory">
+                <div class="Homelinks">
+                    <a routerLink="/{{src.Controller}}/{{src.Page}}/{{src.Parameter}}" class="text-black-50">
+                        <span [innerHTML]="src.Logo" class="fa-2x align-middle text-dark"></span>  {{src.AppName}}
+                    </a>
+                </div>            
+                <hr class="my-2"/>
+            </ng-container>
+        </nz-card>
+        <ng-template #Title>
+            <h6 class="text-wrap text-center m-0 text-white text-uppercase">{{item.MainClass}}</h6>
+        </ng-template>        
+    </div>
+  </div>
+  <!-- <div *ngFor="let item of Directory" class="text-center">
+        <h1 class>{{item.mainClass}}</h1>
+        <ul>
+            <li *ngFor="let src of item.directory">
+                <a routerLink="/{{src.controller}}/{{src.page}}/{{src.parameter}}">{{src.appName}}</a>
+            </li>
+        </ul>        
+    </div> -->
+</section>

@@ -1,0 +1,55 @@
+<form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <div class="form-group m-0">
+        <div class="input-group m-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">User Name</span>
+            </div>
+            <input type="text" class="form-control" id="UserName" aria-describedby="basic-addon3" formControlName="UserName">
+        </div>
+    </div>
+    <div class="form-group mb-2">
+        <label class="col text-danger p-0" *ngIf="Form.controls['UserName'].hasError('required')">
+            <i class="fas fa-times-circle"></i>
+            Required Field!
+        </label>
+    </div>
+    <div class="form-group m-0">
+        <div class="input-group m-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Full Name</span>
+            </div>
+            <input type="text" class="form-control" id="FullName" aria-describedby="basic-addon3" formControlName="FullName">
+        </div>
+    </div>
+    <div class="form-group mb-2">
+        <label class="col text-danger p-0" *ngIf="Form.controls['FullName'].hasError('required')">
+            <i class="fas fa-times-circle"></i>
+            Required Field!
+        </label>
+    </div>
+    <div class="form-group m-0">
+        <div class="input-group m-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Role</span>
+            </div>
+            <select class="form-select" id="RoleID" formControlName="RoleID">
+                <option *ngFor="let role of RoleList" value="{{role.RoleID}}">{{role.RoleName}}</option>
+              </select>
+        </div>
+    </div>
+    <div class="form-group mb-2">
+        <label class="col text-danger p-0" *ngIf="Form.controls['RoleID'].hasError('required')">
+            <i class="fas fa-times-circle"></i>
+            Required Field!
+        </label>
+    </div>    
+    <div class="form-group m-0">
+        <div class="col-xs-6">
+            <button [disabled]="loading || Form.invalid || !Form.touched"
+                class="btn btn-outline-primary btn-block mx-0 mt-0 mb-2 py-2 rounded text-uppercase" type="submit">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                SAVE
+            </button>
+        </div>
+    </div>
+</form>

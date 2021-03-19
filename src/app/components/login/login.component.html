@@ -1,0 +1,44 @@
+<MainHeader></MainHeader>
+<div class="container-fluid px-3 my-5">
+  <div class="row row-cols-2">
+    <div class="col text-font-base px-5">
+      <h1 class="text-capitalize">Log in</h1>
+      <p>Please use the CAN Capital credentials</p>
+      <hr class="mw-100" style="width: 20rem;" />
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mw-100" style="width: 15rem;">
+        <div class="input-group mt-3 mb-0">
+          <span class="input-group-text" id="UserNameAdd"><i class="fas fa-user"></i></span>
+          <input type="text" formControlName="UserName" class="form-control" placeholder="Username"
+            aria-label="UserName" aria-describedby="UserNameAdd">
+        </div>
+        <div *ngIf="f.UserName.touched && !f.UserName.valid" class="form-group input-group m-0">
+          <label class="text-danger text-font-base mx-2" style="font-size: 0.75rem;"><i
+              class="fas fa-times-circle mr-2"></i> Username is required!!!</label>
+        </div>
+        <div class="input-group mt-3 mb-0">
+          <span class="input-group-text" id="PasswordAdd"><i class="fas fa-key"></i></span>
+          <input type="password" formControlName="Password" class="form-control" placeholder="Password"
+            aria-label="Password" aria-describedby="PasswordAdd">
+        </div>
+        <div *ngIf="f.Password.touched && !f.Password.valid" class="form-group input-group">
+          <label class="text-danger text-font-base mx-2" style="font-size: 0.75rem;"><i
+              class="fas fa-times-circle mr-2"></i> Password is required!!!</label>
+        </div>
+        <div class="input-group text-center my-3 d-grid">
+          <button [disabled]="loginForm.invalid" class="btn btn-outline-primary text-font-base text-uppercase">
+            <div *ngIf="isLoading" class="spinner-border spinner-border-sm align-middle" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            Log in
+          </button>
+        </div>
+
+      </form>
+    </div>
+    <div class="col px-5">
+      <div class="text-center">
+        <img src="../../../assets/images/Reporting_Logo.png" class="mw-100" style="width: 17rem;">
+      </div>
+    </div>
+  </div>
+</div>

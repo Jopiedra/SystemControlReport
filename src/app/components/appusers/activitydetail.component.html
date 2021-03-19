@@ -1,0 +1,16 @@
+<table class="table table-md-responsive">
+    <thead>
+        <tr>
+            <th class="text-uppercase">Field</th>
+            <th class="text-uppercase">Start Value</th>
+            <th class="text-uppercase">End Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of Details" class="{{item.Change? 'bg-warning': ''}}">
+            <td>{{item.Field}}</td>
+            <td>{{item.StartValue? item.StartValue: 'N/A'}}</td>
+            <td>{{item.EndValue}}</td>
+        </tr>
+    </tbody>
+</table>

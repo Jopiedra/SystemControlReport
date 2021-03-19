@@ -1,0 +1,22 @@
+<table class="table table-sm table-hover align-content-center p-0 m-0">
+  <thead>
+    <tr class="align-middle">
+      <th class="py-2">Main Class</th>
+      <th class="py-2">App Name</th>
+      <th class="text-center py-2">Read</th>
+      <th class="text-center py-2">Write</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of RightsList">
+      <td class="align-middle">{{ item.MainClass }}</td>
+      <td class="align-middle">{{ item.AppName }}</td>
+      <td class="text-center align-middle">
+        <mat-checkbox [checked]="item.ReadRight" (click)="UpdateRight(item,'Read')"></mat-checkbox>
+      </td>
+      <td class="text-center align-middle">
+        <mat-checkbox [checked]="item.WriteRight" (click)="UpdateRight(item,'Write')"></mat-checkbox>
+      </td>
+    </tr>
+  </tbody>
+</table>

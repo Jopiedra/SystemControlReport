@@ -1,0 +1,57 @@
+<form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <div class="form-group m-0">
+        <div class="input-group m-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Full Name</span>
+            </div>
+            <input type="text" class="form-control" id="FullName" aria-describedby="basic-addon3" formControlName="FullName">
+        </div>
+    </div>
+    <div class="form-group mb-2">
+        <label class="col text-danger p-0" *ngIf="Form.controls['FullName'].hasError('required')">
+            <i class="fas fa-times-circle"></i>
+            Required Field!
+        </label>
+    </div>
+    <div class="form-group m-0">
+        <div class="input-group m-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Email</span>
+            </div>
+            <input type="email" class="form-control" id="Email" aria-describedby="basic-addon3" formControlName="Email">
+        </div>
+    </div>
+    <div class="form-group mb-2">
+        <label class="col text-danger p-0" *ngIf="Form.controls['Email'].hasError('required')">
+            <i class="fas fa-times-circle"></i>
+            Required Field!
+        </label>
+        <label class="col text-danger p-0" *ngIf="Form.controls['Email'].hasError('email')">
+            <i class="fas fa-times-circle"></i>
+            Enter a valid email!
+        </label>
+    </div>
+    <div class="form-group m-0" style="width: 200px;">
+        <div class="input-group m-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Category</span>
+            </div>
+            <input type="number" class="form-control" id="Category" aria-describedby="basic-addon3" formControlName="Category" min="1">
+        </div>
+    </div>
+    <div class="form-group mb-2">
+        <label class="col text-danger p-0" *ngIf="Form.controls['Category'].hasError('required')">
+            <i class="fas fa-times-circle"></i>
+            Required Field!
+        </label>
+    </div>   
+    <div class="form-group m-0">
+        <div class="col-xs-6">
+            <button [disabled]="loading || Form.invalid || !Form.touched"
+                class="btn btn-outline-primary btn-block mx-0 mt-0 mb-2 py-2 rounded text-uppercase" type="submit">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                SAVE
+            </button>
+        </div>
+    </div>
+</form>

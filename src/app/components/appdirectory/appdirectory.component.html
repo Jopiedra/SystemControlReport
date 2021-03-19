@@ -1,0 +1,98 @@
+<MainHeader></MainHeader>
+<section class="px-5 py-3 w-100">
+  <SideMenu></SideMenu>
+  <hr />
+  <section class="container-fluid my-2 bg-white-50 p-0">
+    <div class="text-center text-font-base pt-2">
+      <h2 class="m-0"><i class="fas fa-sitemap"></i> AppDirectory</h2>
+      <p class="subtitle mb-2">Manage of the different part of the application</p>
+    </div>
+    <div class="text-font-base">
+      <a title="Add New Directory" class="btn btn-light btn-outline-dark text-black mr-2 my-2"
+        style="text-decoration: none; cursor: pointer;" (click)="open(ModelNewDirectory)">
+        <i class="fas fa-plus-square fa-1x"></i> Add Directory
+      </a>
+      <ng-template #ModelNewDirectory let-c="close" let-d="dismiss">
+        <div class="modal-header p-0 bg-dark">
+          <div class="col text-center">
+            <h2 class="mx-0 my-2 text-white text-font-base">New Directory</h2>
+          </div>
+        </div>
+        <div class="modal-body">
+          <AppDirectoryUpsert></AppDirectoryUpsert>
+          <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Close');ngOnInit();">CLOSE</button>
+        </div>
+      </ng-template>
+      <table class="table table-responsive table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th class="align-middle">Main Class</th>
+            <th class="align-middle text-center">Logo</th>
+            <th class="align-middle">App Name</th>
+            <th class="align-middle">Controller</th>
+            <th class="align-middle text-center">Page</th>
+            <th class="align-middle text-center">Parameter</th>
+            <th class="align-middle text-center">Order</th>
+            <th class="align-middle text-center">Status</th>
+            <th class="align-middle text-center" colSpan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of Directory">
+            <td class="align-middle">{{ item.MainClass }}</td>
+            <td class="align-middle fa-2x text-center">
+              <div [innerHTML]="item.Logo"></div>
+            </td>
+            <td class="align-middle">{{ item.AppName }}</td>
+            <td class="align-middle">{{ item.Controller }}</td>
+            <td class="align-middle text-center">{{ item.Page }}</td>
+            <td class="align-middle text-center">{{ item.Parameter? item.Parameter: 'N/A' }}</td>
+            <td class="align-middle text-center">{{ item.Order }}</td>
+            <td *ngIf="item.ActiveFlag"
+              class="text-center align-middle {{item.ActiveFlag? 'text-success': 'text-danger'}}" style="width: 110px;">
+              <a (click)="ChangeStatus(item.ApplicationID)" nz-tooltip nzTooltipTitle="Disable?" nzTooltipColor="Red"
+                nzTooltipPlacement="top">
+                <i id="Editflag{{item.ApplicationID }}" [ngClass]="'ActiveColor fas fa-check-circle fa-1x'"
+                  onmouseover="this.style.color='red';" onmouseout="this.style.color='green'"></i> Active
+              </a>
+            </td>
+            <td *ngIf="!item.ActiveFlag"
+              class="text-center align-middle {{item.ActiveFlag? 'text-success': 'text-danger'}}" style="width: 110px;">
+              <a (click)="ChangeStatus(item.ApplicationID)" nz-tooltip nzTooltipTitle="Enable?" nzTooltipColor="Green"
+                nzTooltipPlacement="top">
+                <i id="Editflag{{item.ApplicationID}}" [ngClass]="'fas fa-times-circle fa-1x DisactiveColor'"
+                  onmouseover="this.style.color='green';" onmouseout="this.style.color='red'"></i> Inactive</a>
+            </td>
+            <td class="align-middle text-center">
+              <a nz-tooltip nzTooltipTitle="Edit" nzTooltipColor="Blue" nzTooltipPlacement="top"
+                (click)="open(ModalEdit)">
+                <i class="far fa-edit fa-15x"></i>
+              </a>
+              <ng-template #ModalEdit let-c="close" let-d="dismiss">
+                <div class="modal-header p-0 bg-dark">
+                  <div class="col text-center">
+                    <h2 class="mx-0 my-2 text-white text-font-base">Edit Directory</h2>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <AppDirectoryUpsert [Application]="item"></AppDirectoryUpsert>
+                  <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                </div>
+              </ng-template>
+            </td>
+            <td class="align-middle text-center">
+              <a nz-tooltip nzTooltipTitle="Enable" nzTooltipColor="Green" nzTooltipPlacement="top"
+                (click)="ChangeStatus(item.ApplicationID)" *ngIf="!item.ActiveFlag">
+                <i class="far fa-check-circle fa-15x text-success"></i>
+              </a>
+              <a nz-tooltip nzTooltipTitle="Disable" nzTooltipColor="Red" nzTooltipPlacement="top"
+                (click)="ChangeStatus(item.ApplicationID)" *ngIf="item.ActiveFlag">
+                <i class="far fa-times-circle fa-15x text-danger"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
