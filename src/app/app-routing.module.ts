@@ -13,6 +13,7 @@ import { ServersComponent } from './components/servers/servers.component';
 import { EmailDirectoryComponent } from './components/emaildirectory/emaildirectory.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { SharedFoldersComponent } from './components/sharedfolders/sharedfolders.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 const routes: Routes = [
 
@@ -36,8 +37,8 @@ const routes: Routes = [
   { path: 'Departments/Index', component: DepartmentsComponent, canActivate: [AuthGuard] },
   { path: 'SFolders', component: SharedFoldersComponent, canActivate: [AuthGuard] },
   { path: 'SFolders/Index', component: SharedFoldersComponent, canActivate: [AuthGuard] },
-  { path: 'Reports', component: HomePageComponent, canActivate: [AuthGuard] },
-  { path: 'Reports/Index', component: HomePageComponent, canActivate: [AuthGuard] },
+  { path: 'Reports', component: ReportsComponent, canActivate: [AuthGuard] },
+  { path: 'Reports/Index', component: ReportsComponent, canActivate: [AuthGuard] },
   { path: 'DLs', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'DLs/Index', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'Triggers', component: HomePageComponent, canActivate: [AuthGuard] },

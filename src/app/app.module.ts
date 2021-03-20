@@ -30,12 +30,14 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 
 import { MainHeaderComponent } from './components/header/header.component';
 import { MainFooterComponent } from './components/footer/footer.component';
+import { LoadingComponent } from './components/loading/loading.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomePageComponent } from './components/homepage/home.component';
 import { SideMenuComponent } from './components/sidemenu/sidemenu.component';
@@ -58,6 +60,7 @@ import { DepartmentsComponent } from './components/departments/departments.compo
 import { DepartmentUpsertComponent } from './components/departments/upsert.component';
 import { SharedFoldersComponent } from './components/sharedfolders/sharedfolders.component';
 import { SharedFolderUpsertComponent } from './components/sharedfolders/upsert.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 const antDesignIcons = AllIcons as { [key: string]: IconDefinition; };
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
@@ -67,6 +70,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     AppComponent
     , MainHeaderComponent
     , MainFooterComponent
+    , LoadingComponent
     , LoginComponent
     , HomePageComponent
     , SideMenuComponent
@@ -89,6 +93,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     , DepartmentUpsertComponent
     , SharedFoldersComponent
     , SharedFolderUpsertComponent
+    , ReportsComponent
   ],
   imports: [
     ReactiveFormsModule
@@ -113,6 +118,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     , NzBreadCrumbModule
     , NzCardModule
     , NzToolTipModule
+    , NzPopoverModule
     , NgbModule
   ],
   schemas: [
