@@ -13,7 +13,14 @@ import { ReportsService } from '../../services/reports.service';
     , templateUrl: 'reports.component.html'
     , providers: [
         ReportsService
-    ]    
+    ]
+    , styles: [
+        `
+        ::ng-deep .ant-popover-title {
+                background-color: darkgray !important;
+            }
+        `
+    ]
 })
 
 export class ReportsComponent implements OnInit {

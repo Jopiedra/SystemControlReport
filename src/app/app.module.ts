@@ -61,6 +61,7 @@ import { DepartmentUpsertComponent } from './components/departments/upsert.compo
 import { SharedFoldersComponent } from './components/sharedfolders/sharedfolders.component';
 import { SharedFolderUpsertComponent } from './components/sharedfolders/upsert.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { ReportsUpsertComponent } from './components/reports/upsert.component';
 
 const antDesignIcons = AllIcons as { [key: string]: IconDefinition; };
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
@@ -94,6 +95,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     , SharedFoldersComponent
     , SharedFolderUpsertComponent
     , ReportsComponent
+    , ReportsUpsertComponent
   ],
   imports: [
     ReactiveFormsModule

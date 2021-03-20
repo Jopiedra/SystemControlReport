@@ -23,7 +23,7 @@
       </form>
       <a class="btn btn-light btn-outline-dark text-black mx-2 my-0" nz-tooltip nzTooltipTitle="Add Report"
         nzTooltipColor="Blue" nzTooltipPlacement="top" style="text-decoration: none; cursor: pointer;"
-        (click)="open(ModelAddNew)">
+        routerLink="/Reports/AddNew" target="_blank">
         <i class="fas fa-plus-square fa-1x"></i>
       </a>
     </div>
@@ -43,39 +43,28 @@
           <tr *ngFor="let item of ModelListObs | slice: (page-1) * pageSize: (page-1)* pageSize + pageSize">
             <td class="text-center align-middle">
               <a nz-tooltip nzTooltipTitle="Edit" nzTooltipColor="Green" nzTooltipPlacement="top"
-                style="text-decoration: none; cursor: pointer;" (click)="open(ModelEdit)">
+                style="text-decoration: none; cursor: pointer;" routerLink="/Reports/Edit/{{item.RPTID}}" target="_blank">
                 <i class="fas fa-edit fa-15x"></i>
-              </a>
-              <ng-template #ModelEdit let-c="close" let-d="dismiss">
-                <div class="modal-header p-0 bg-dark">
-                  <div class="col text-center">
-                    <h3 class="mx-0 my-2 text-white text-font-base">Edit Info</h3>
-                  </div>
-                </div>
-                <div class="modal-body">
-                  
-                  <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Close');">CLOSE</button>
-                </div>
-              </ng-template>
+              </a>              
             </td>
             <td class="align-middle text-center">
-                <a routerLink="/Reports/Details/{{item.RPTID}}" nz-popover nzType="primary" [nzPopoverTitle]="contentTitle" [nzPopoverContent]="contentDetail" nzPopoverPlacement="right">
+                <a routerLink="/Reports/Details/{{item.RPTID}}" target="_blank" nz-popover nzType="primary" [nzPopoverTitle]="contentTitle" [nzPopoverContent]="contentDetail" nzPopoverPlacement="right">
                     <i class="far fa-file-search fa-15x"></i>
                 </a>
                 <ng-template #contentTitle>
-                  <h6 class="mx-0 my-1 p-0 text-font-base text-primary font-weight-bold">{{item.FileName}}</h6>
+                  <h6 class="mx-0 my-1 p-0 text-font-base font-weight-bold">{{item.FileName}}</h6>
                 </ng-template>
                 <ng-template #contentDetail>
                   <div class="text-font-base">
-                    <p class="m-0 p-0"><strong>Email Subject Name:</strong> <span class="text-primary"> {{item.EmailSubjectName}}</span></p>
-                    <p class="m-0 p-0"><strong>Log File Name:</strong> <span class="text-primary"> {{item.LogsFileName}}</span></p>
-                    <p class="m-0 p-0"><strong>Department:</strong> <span class="text-primary"> {{item.Department}}</span></p>
-                    <p class="m-0 p-0"><strong>Business Sponsor:</strong> <span class="text-primary"> {{item.BusinessSponsor}}</span></p>
-                    <p class="m-0 p-0"><strong>Computer Assigned:</strong> <span class="text-primary"> {{item.ComputerAssigned}}</span></p>
-                    <p class="m-0 p-0"><strong>Delivery Method:</strong> <span class="text-primary"> {{item.DeliveryMethod}}</span></p>
-                    <p class="m-0 p-0"><strong>Frequency:</strong> <span class="text-primary"> {{item.Frequency}}</span></p>
-                    <p class="m-0 p-0"><strong>Status:</strong> <span class="text-primary"> {{item.Status ? "Active":"Inactive"}}</span></p>
-                    <p class="m-0 p-0"><strong>Execution Status:</strong> <span class="text-primary"> {{item.ExecutionStatus}}</span></p>  
+                    <p class="my-1 p-0"><strong>Email Subject Name:</strong> <span class="text-primary"> {{item.EmailSubjectName}}</span></p>
+                    <p class="my-1 p-0"><strong>Log File Name:</strong> <span class="text-primary"> {{item.LogsFileName}}</span></p>
+                    <p class="my-1 p-0"><strong>Department:</strong> <span class="text-primary"> {{item.Department}}</span></p>
+                    <p class="my-1 p-0"><strong>Business Sponsor:</strong> <span class="text-primary"> {{item.BusinessSponsor}}</span></p>
+                    <p class="my-1 p-0"><strong>Computer Assigned:</strong> <span class="text-primary"> {{item.ComputerAssigned}}</span></p>
+                    <p class="my-1 p-0"><strong>Delivery Method:</strong> <span class="text-primary"> {{item.DeliveryMethod}}</span></p>
+                    <p class="my-1 p-0"><strong>Frequency:</strong> <span class="text-primary"> {{item.Frequency}}</span></p>
+                    <p class="my-1 p-0"><strong>Status:</strong> <span class="text-primary"> {{item.Status ? "Active":"Inactive"}}</span></p>
+                    <p class="my-1 p-0"><strong>Execution Status:</strong> <span class="text-primary"> {{item.ExecutionStatus}}</span></p>  
                   </div>                
                 </ng-template>
             </td>
@@ -106,20 +95,9 @@
     </div>
     <div class="text-font-base">
         <a title="Add New Report" class="btn btn-light btn-outline-dark text-black mr-2 my-2"
-          style="text-decoration: none; cursor: pointer;" (click)="open(ModelAddNew)">
+          style="text-decoration: none; cursor: pointer;" routerLink="/Reports/AddNew" target="_blank">
           <i class="fas fa-plus-square fa-1x"></i> Add New Report
-        </a>
-        <ng-template #ModelAddNew let-c="close" let-d="dismiss">
-          <div class="modal-header p-0 bg-dark">
-            <div class="col text-center">
-              <h3 class="mx-0 my-2 text-white text-font-base">New Report</h3>
-            </div>
-          </div>
-          <div class="modal-body">
-            
-            <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Close');ngOnInit();">CLOSE</button>
-          </div>
-        </ng-template>
+        </a>        
       </div>
   </div>
 </section>

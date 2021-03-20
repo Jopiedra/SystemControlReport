@@ -14,6 +14,7 @@ import { EmailDirectoryComponent } from './components/emaildirectory/emaildirect
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { SharedFoldersComponent } from './components/sharedfolders/sharedfolders.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { ReportsUpsertComponent } from './components/reports/upsert.component';
 
 const routes: Routes = [
 
@@ -39,6 +40,8 @@ const routes: Routes = [
   { path: 'SFolders/Index', component: SharedFoldersComponent, canActivate: [AuthGuard] },
   { path: 'Reports', component: ReportsComponent, canActivate: [AuthGuard] },
   { path: 'Reports/Index', component: ReportsComponent, canActivate: [AuthGuard] },
+  { path: 'Reports/:Type', component: ReportsUpsertComponent, canActivate: [AuthGuard] },
+  { path: 'Reports/:Type/:RPTID', component: ReportsUpsertComponent, canActivate: [AuthGuard] },
   { path: 'DLs', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'DLs/Index', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'Triggers', component: HomePageComponent, canActivate: [AuthGuard] },
