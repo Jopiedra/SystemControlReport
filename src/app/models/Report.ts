@@ -15,7 +15,7 @@ export class Report {
     Status!: boolean;
     ServerAssignedID!: number;
     Server!: string;
-    SharedFolderID!: number;
+    SharedFolderID?: number;
     SharedFolder!: string;
     Note!: string;
     BSID!: number;

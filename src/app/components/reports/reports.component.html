@@ -69,7 +69,11 @@
                 </ng-template>
             </td>
             <td class="align-middle text-center">{{item.RPTID}}</td>
-            <td class="align-middle">{{item.FileName}}</td>
+            <td class="align-middle">
+              <a routerLink="/Reports/Details/{{item.RPTID}}" target="_blank">
+                {{item.FileName}}
+              </a>
+            </td>
             <td class="align-middle text-center">{{item.ExecutionStatus}}</td>
 
             <td class="align-middle text-center {{item.Status? 'text-success': 'text-danger'}}" *ngIf="item.Status">

@@ -4,31 +4,23 @@ import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 
-import { Report } from '../../models/Report';
+import { SourcePath } from '../../models/SourcePath';
 
-import { ReportsService } from '../../services/reports.service';
+import { SourcePathsService } from '../../services/sourcepaths.service';
 
 @Component({
-    selector: 'Reports'
-    , templateUrl: 'reports.component.html'
+    selector: 'SourcePath'
+    , templateUrl: 'sourcepath.component.html'
     , providers: [
-        ReportsService
-    ]
-    , styles: [
-        `
-        ::ng-deep .ant-popover-title {
-                background-color: darkgray !important;
-            }
-        `
-    ]
+        SourcePathsService
+    ]    
 })
 
-export class ReportsComponent implements OnInit {
+export class SourcePathComponent implements OnInit {
 
-    public ModelList: Report[] = [];
-    public ModelListObs: Report[] = [];
+    public ModelList: SourcePath[] = [];
+    public ModelListObs: SourcePath[] = [];
     public txtSearch: string = '';
-    public Loading: boolean = true;
     filterInput = new FormControl();
     page = 1;
     pageSize = 10;
@@ -37,7 +29,7 @@ export class ReportsComponent implements OnInit {
         private TitleSVC: Title
         , private ModConfig: NgbModalConfig
         , private Mod: NgbModal
-        , private ReportSVC: ReportsService
+        , private SourcePathsSVC: SourcePathsService
     ) {}
 
     open(Content: any) {
@@ -45,33 +37,30 @@ export class ReportsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.TitleSVC.setTitle("SCR - Reports");
+        this.TitleSVC.setTitle("SCR - Source Paths");
         this.ModConfig.backdrop = 'static';
         this.ModConfig.keyboard = false;
         this.ModConfig.centered = true;
         this.ModConfig.scrollable = true;
-        
-        this.ReportSVC.List().subscribe(
+
+        this.SourcePathsSVC.List().subscribe(
             res => {
                 this.ModelList = res;
                 this.ModelListObs = this.ModelList;
-                this.Loading = false;
+               //console.log(this.ServerList);
             }
         );
 
         this.filterInput.valueChanges.pipe(
             debounceTime(200)
         ).subscribe(term => {
-            this.page = 1;
             this.txtSearch = this.filterInput.value;
             this.ModelListObs = this.ModelList.filter(rsc => FilterData(rsc, term));
         });
 
         /* Functions */
-        function FilterData(obj: Report, term: string) {
-            if (obj.FileName.toLowerCase().indexOf(term.toLowerCase()) >= 0
-                || obj.LogsFileName.toLowerCase().indexOf(term.toLowerCase()) >= 0
-                || obj.EmailSubjectName.toLowerCase().indexOf(term.toLowerCase()) >= 0) {
+        function FilterData(obj: SourcePath, term: string) {
+            if (obj.Address.toLowerCase().indexOf(term.toLowerCase()) >= 0) {
                 return true;
             }
             else {
@@ -80,13 +69,13 @@ export class ReportsComponent implements OnInit {
         }
     }
 
-    ChangeStatus(RPTID: number) {
-        let model = new Report();
+    ChangeStatus(SFID: number) {
+        let model = new SourcePath();
 
-        model.RPTID = RPTID;
+        model.SourceID = SFID;
         model.ActionType = 'CHGST';
 
-        this.ReportSVC.Upsert(model,'UPDATE').subscribe(
+        this.SourcePathsSVC.Upsert(model,'UPDATE').subscribe(
             res => {
                 if(res) {
                     this.ngOnInit();

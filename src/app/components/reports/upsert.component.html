@@ -9,8 +9,234 @@
       <p class="subtitle mb-2">{{SubTitle}}</p>
     </div>
   </div>
-  <div class="container-fluid my-2 bg-white-50 p-0">
-      <h1>{{ActionType}}</h1>
-      <h2>{{RPTID}}</h2>
+  <hr />  
+  <div class="container-fluid my-2 bg-white-50 p-0 text-font-base">
+      <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+        <div class="row row-cols-6">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100" *ngIf="isRead">
+              <mat-label>Status</mat-label>
+              <input matInput value="{{Model.Status?'Active':'Inactive'}}" readonly>              
+              <i matSuffix class="fas {{Model.Status?'fa-check-circle text-success':'fa-times-circle text-danger'}} fa-15x align-middle mb-3"></i>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>File Name</mat-label>
+              <input matInput placeholder="RPT_Example Report" formControlName="FileName" required [readonly]="isRead">
+              <mat-error *ngIf="Form.controls['FileName'].hasError('required')">You must enter a value</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Log File Name</mat-label>
+              <input matInput placeholder="A-RPT_Example Report" formControlName="LogFileName" [readonly]="isRead">              
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Computer Assigned</mat-label>
+              <input matInput [value]="Model.ComputerAssigned" readonly *ngIf="isRead">
+              <mat-select formControlName="ComputerAssigned" required *ngIf="!isRead">
+                <mat-option *ngFor="let item of CompList" [value]='item.ComputerID'>{{item.ComputerName}}</mat-option>                
+              </mat-select>
+              <a matSuffix nz-tooltip nzTooltipTitle="Add Computer..." nzTooltipColor="Blue"
+                  nzTooltipPlacement="top" (click)="open(ModalComputer)" *ngIf="!isRead">
+                  <i class="fas fa-plus-circle fa-15x align-middle mb-3"></i>          
+              </a>
+              <mat-error *ngIf="Form.controls['ComputerAssigned'].hasError('required') && !isRead" >You must select a value</mat-error>
+              <ng-template #ModalComputer let-c="close" let-d="dismiss">
+                <div class="modal-header p-0 bg-dark">
+                  <div class="col text-center">
+                    <h3 class="mx-0 my-2 text-white text-font-base">New Reporting Server</h3>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <ComputerUpsert></ComputerUpsert>
+                  <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                </div>
+              </ng-template>           
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Server Assigned</mat-label>
+              <input matInput [value]="Model.Server" readonly *ngIf="isRead">
+              <mat-select formControlName="ServerAssigned" required *ngIf="!isRead">
+                <mat-option *ngFor="let item of ServerList" [value]='item.ServerID'>{{item.ServerType}} - {{item.ServerName}}</mat-option>                
+              </mat-select>
+              <a matSuffix nz-tooltip nzTooltipTitle="Add Server..." nzTooltipColor="Blue"
+                  nzTooltipPlacement="top" (click)="open(ModalServer)" *ngIf="!isRead">
+                  <i class="fas fa-plus-circle fa-15x align-middle mb-3"></i>          
+              </a>
+              <mat-error *ngIf="Form.controls['ServerAssigned'].hasError('required')">You must select a value</mat-error>
+              <ng-template #ModalServer let-c="close" let-d="dismiss">
+                <div class="modal-header p-0 bg-dark">
+                  <div class="col text-center">
+                    <h3 class="mx-0 my-2 text-white text-font-base">New Server</h3>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <ServerUpsert></ServerUpsert>
+                  <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                </div>
+              </ng-template>           
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Source Path</mat-label>
+              <input matInput [value]="Model.SourcePath" readonly *ngIf="isRead">
+              <span matSuffix *ngIf="isRead" nz-tooltip nzTooltipTitle="Copy Address..." nzTooltipColor="Blue"
+                      nzTooltipPlacement="top" [cdkCopyToClipboard]="Model.SourcePath" style="cursor: pointer;">
+                      <i class="far fa-copy fa-15x align-middle mb-3"></i>
+              </span>
+              <mat-select formControlName="SourcePath" required *ngIf="!isRead">
+                <mat-option *ngFor="let item of SPathList" [value]='item.SourceID' title="{{item.Address}}">{{item.Address}}</mat-option>                
+              </mat-select>
+              <a matSuffix nz-tooltip nzTooltipTitle="Add Source Path..." nzTooltipColor="Blue"
+                  nzTooltipPlacement="top" (click)="open(ModalSPath)" *ngIf="!isRead">
+                  <i class="fas fa-plus-circle fa-15x align-middle mb-3"></i>          
+              </a>
+              <mat-error *ngIf="Form.controls['SourcePath'].hasError('required')">You must select a value</mat-error>
+              <ng-template #ModalSPath let-c="close" let-d="dismiss">
+                <div class="modal-header p-0 bg-dark">
+                  <div class="col text-center">
+                    <h3 class="mx-0 my-2 text-white text-font-base">New Source Path</h3>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <SharedFolderUpsert></SharedFolderUpsert>
+                  <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                </div>
+              </ng-template>           
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Department</mat-label>
+              <input matInput [value]="Model.Department" readonly *ngIf="isRead">
+              <mat-select formControlName="Department" required *ngIf="!isRead">
+                <mat-option *ngFor="let item of DepList" [value]='item.DepartmentID'>{{item.DepartmentName}}</mat-option>                
+              </mat-select>
+              <a matSuffix nz-tooltip nzTooltipTitle="Add Department" nzTooltipColor="Blue"
+                  nzTooltipPlacement="top" (click)="open(ModalDepartment)" *ngIf="!isRead">
+                  <i class="fas fa-plus-circle fa-15x align-middle mb-3"></i>          
+              </a>
+              <mat-error *ngIf="Form.controls['Department'].hasError('required')">You must select a value</mat-error>
+              <ng-template #ModalDepartment let-c="close" let-d="dismiss">
+                <div class="modal-header p-0 bg-dark">
+                  <div class="col text-center">
+                    <h3 class="mx-0 my-2 text-white text-font-base">New Department</h3>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <DepartmentUpsert></DepartmentUpsert>
+                  <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                </div>
+              </ng-template>           
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Business Sponsor</mat-label>
+              <input matInput [value]="Model.BusinessSponsor" readonly *ngIf="isRead">
+              <mat-select formControlName="BusinessSponsor" required *ngIf="!isRead">
+                <mat-option *ngFor="let item of BSList" [value]='item.RecipientID'>{{item.FullName}}</mat-option>                
+              </mat-select>
+              <a matSuffix nz-tooltip nzTooltipTitle="Add Business Sponsor" nzTooltipColor="Blue"
+                  nzTooltipPlacement="top" (click)="open(ModalBS)" *ngIf="!isRead">
+                  <i class="fas fa-plus-circle fa-15x align-middle mb-3"></i>          
+              </a>
+              <mat-error *ngIf="Form.controls['BusinessSponsor'].hasError('required')">You must select a value</mat-error>
+              <ng-template #ModalBS let-c="close" let-d="dismiss">
+                <div class="modal-header p-0 bg-dark">
+                  <div class="col text-center">
+                    <h3 class="mx-0 my-2 text-white text-font-base">New Business Sponsor</h3>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <EmailDirectoryUpsert></EmailDirectoryUpsert>
+                  <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                </div>
+              </ng-template>           
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">            
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Delivery Method</mat-label>
+              <input matInput [value]="Model.BusinessSponsor" readonly *ngIf="isRead">
+              <mat-select formControlName="DeliveryMethod" required *ngIf="!isRead">
+                <mat-option *ngFor="let item of DMList" [value]='item'>{{item}}</mat-option>                
+              </mat-select>
+              <mat-error *ngIf="Form.controls['DeliveryMethod'].hasError('required')">You must select a value</mat-error>              
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100" *ngIf="EmailFlag">
+              <mat-label>Email Subject Name</mat-label>
+              <input matInput placeholder="RPT_Example Report" formControlName="EmailSubjectName" required="EmailFlag" [readonly]="isRead">
+              <mat-error *ngIf="Form.controls['EmailSubjectName'].hasError('required')">You must select a value</mat-error>              
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100" *ngIf="SFFlag">
+              <mat-label>Shared Folder</mat-label>
+              <input matInput [value]="Model.SharedFolder" readonly *ngIf="isRead">
+              <span matSuffix *ngIf="isRead" nz-tooltip nzTooltipTitle="Copy Address..." nzTooltipColor="Blue"
+                      nzTooltipPlacement="top" [cdkCopyToClipboard]="Model.SharedFolder" style="cursor: pointer;">
+                      <i class="far fa-copy fa-15x align-middle mb-3"></i>
+              </span>
+              <mat-select formControlName="SharedFolder" required="SFFlag" *ngIf="!isRead">
+                <mat-option *ngFor="let item of SFolderList" [value]='item.SFID' title="{{item.Address}}">{{item.Address}}</mat-option>                
+              </mat-select>
+              <a matSuffix nz-tooltip nzTooltipTitle="Add Source Path..." nzTooltipColor="Blue"
+                  nzTooltipPlacement="top" (click)="open(ModalSFolder)" *ngIf="!isRead">
+                  <i class="fas fa-plus-circle fa-15x align-middle mb-3"></i>          
+              </a>
+              <mat-error *ngIf="Form.controls['SharedFolder'].hasError('required')">You must select a value</mat-error>
+              <ng-template #ModalSFolder let-c="close" let-d="dismiss">
+                <div class="modal-header p-0 bg-dark">
+                  <div class="col text-center">
+                    <h3 class="mx-0 my-2 text-white text-font-base">New Shared Folder</h3>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <SharedFolderUpsert></SharedFolderUpsert>
+                  <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                </div>
+              </ng-template>           
+            </mat-form-field>          
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Main Frequency</mat-label>
+              <input matInput [value]="Model.Frequency" readonly *ngIf="isRead">
+              <mat-select formControlName="Frequency" required *ngIf="!isRead">
+                <mat-option *ngFor="let item of FreqList" [value]='item.id'>{{item.value}}</mat-option>                
+              </mat-select>
+              <mat-error *ngIf="Form.controls['Frequency'].hasError('required')">You must select a value</mat-error>              
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Notes</mat-label>
+              <textarea matInput formControlName="Notes" rows="10" placeholder="In this section you can put any important detail" [readonly]="isRead"></textarea>              
+            </mat-form-field>
+          </div>
+        </div>        
+        <div class="row row-cols-2">
+          <div class="col-md-3" *ngIf="!isRead">
+            <div class="form-group m-0">
+              <div class="col-xs-6">
+                  <button [disabled]="Loading || Form.invalid || !Form.touched"
+                      class="btn btn-outline-primary btn-block mx-0 mt-0 mb-2 py-2 rounded text-uppercase" type="submit">
+                      <span *ngIf="Loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      <i class="far fa-save"></i> SAVE
+                  </button>
+              </div>
+            </div>            
+          </div> 
+          <div class="col-md-3" *ngIf="isRead">
+            <div class="form-group m-0">
+              <div class="col-xs-6">
+                  <button class="btn btn-outline-primary btn-block mx-0 mt-0 mb-2 py-2 rounded text-uppercase" type="button"
+                          routerLink='/Reports/Edit/{{RPTID}}'>
+                          <i class="fas fa-edit"></i> EDIT
+                  </button>
+              </div>
+            </div>            
+          </div>              
+          <div class="col-md-3">
+            <div class="form-group m-0">
+              <div class="col-xs-6">
+                  <button class="btn btn-outline-dark btn-block mx-0 mt-0 mb-2 py-2 rounded text-uppercase" type="button"
+                          (click)="isRead? ClosePage() : ForHomePage() ">
+                    <i class="{{isRead? 'fas fa-sign-out-alt':'far fa-times-circle'}}"></i> {{isRead? 'CLOSE':'CANCEL'}}
+                  </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6"></div>
+        </div>
+      </form>
   </div>
 </section>

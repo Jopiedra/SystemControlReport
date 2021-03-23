@@ -13,6 +13,7 @@ import { ServersComponent } from './components/servers/servers.component';
 import { EmailDirectoryComponent } from './components/emaildirectory/emaildirectory.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { SharedFoldersComponent } from './components/sharedfolders/sharedfolders.component';
+import { SourcePathComponent } from './components/sourcepath/sourcepath.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ReportsUpsertComponent } from './components/reports/upsert.component';
 
@@ -46,8 +47,8 @@ const routes: Routes = [
   { path: 'DLs/Index', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'Triggers', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'Triggers/Index', component: HomePageComponent, canActivate: [AuthGuard] },
-  { path: 'SourcePaths', component: HomePageComponent, canActivate: [AuthGuard] },
-  { path: 'SourcePaths/Index', component: HomePageComponent, canActivate: [AuthGuard] },
+  { path: 'SourcePaths', component: SourcePathComponent, canActivate: [AuthGuard] },
+  { path: 'SourcePaths/Index', component: SourcePathComponent, canActivate: [AuthGuard] },
   { path: 'MHeadcount', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'MHeadcount/Index', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'MPartners', component: HomePageComponent, canActivate: [AuthGuard] },

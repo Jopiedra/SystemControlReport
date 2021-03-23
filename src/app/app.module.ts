@@ -14,13 +14,15 @@ import { UserIdleModule } from 'angular-user-idle';
 
 /*Angular Material*/
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core'
+import { MatNativeDateModule } from '@angular/material/core';
+
 /*NG Zorro*/
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
@@ -60,6 +62,8 @@ import { DepartmentsComponent } from './components/departments/departments.compo
 import { DepartmentUpsertComponent } from './components/departments/upsert.component';
 import { SharedFoldersComponent } from './components/sharedfolders/sharedfolders.component';
 import { SharedFolderUpsertComponent } from './components/sharedfolders/upsert.component';
+import { SourcePathComponent } from './components/sourcepath/sourcepath.component';
+import { SourcePathUpsertComponent } from './components/sourcepath/upsert.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ReportsUpsertComponent } from './components/reports/upsert.component';
 
@@ -94,6 +98,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     , DepartmentUpsertComponent
     , SharedFoldersComponent
     , SharedFolderUpsertComponent
+    , SourcePathComponent
+    , SourcePathUpsertComponent
     , ReportsComponent
     , ReportsUpsertComponent
   ],
@@ -106,6 +112,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     , HttpClientModule
     , BrowserAnimationsModule
     , MatFormFieldModule
+    , ClipboardModule
     , MatMenuModule
     , MatSidenavModule
     , MatCheckboxModule
@@ -126,6 +133,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
   schemas: [
     NO_ERRORS_SCHEMA
   ],
+  entryComponents: [
+    ReportsUpsertComponent
+  ],  
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
     , { provide: NZ_I18N, useValue: en_US }
