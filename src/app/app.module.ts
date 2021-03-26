@@ -34,6 +34,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 
@@ -66,6 +68,9 @@ import { SourcePathComponent } from './components/sourcepath/sourcepath.componen
 import { SourcePathUpsertComponent } from './components/sourcepath/upsert.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ReportsUpsertComponent } from './components/reports/upsert.component';
+import { DistributionListComponent } from './components/distributionlist/distributionlist.component';
+import { DistributionListDetailsComponent } from './components/distributionlist/details.component';
+import { DLAddNewComponent } from './components/distributionlist/addnew.component';
 
 const antDesignIcons = AllIcons as { [key: string]: IconDefinition; };
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
@@ -102,6 +107,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     , SourcePathUpsertComponent
     , ReportsComponent
     , ReportsUpsertComponent
+    , DistributionListComponent
+    , DistributionListDetailsComponent
+    , DLAddNewComponent
   ],
   imports: [
     ReactiveFormsModule
@@ -128,6 +136,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     , NzCardModule
     , NzToolTipModule
     , NzPopoverModule
+    , NzSelectModule
+    , NzButtonModule
     , NgbModule
   ],
   schemas: [

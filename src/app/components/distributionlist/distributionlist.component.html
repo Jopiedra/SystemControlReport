@@ -1,0 +1,29 @@
+<MainHeader></MainHeader>
+<section class="container-fluid py-3 w-90">
+  <SideMenu></SideMenu>
+  <hr />
+  <div class="container-fluid my-2 bg-white-50 p-0">
+    <div class="text-center text-font-base pt-2">
+      <h2 class="m-0"><i class="fas fa-chart-network"></i> Distribution List</h2>
+      <p class="subtitle mb-2">Manage of the Distribution List</p>
+    </div>
+    <DistributionListDetails></DistributionListDetails>
+    <div class="text-font-base">
+      <a title="Add Distribution List" class="btn btn-light btn-outline-dark text-black mr-2 my-2"
+        style="text-decoration: none; cursor: pointer;" (click)="open(ModalAddNew)">
+        <i class="fas fa-plus-square fa-1x"></i> Add New Distribution List
+      </a>
+      <ng-template #ModalAddNew let-c="close" let-d="dismiss">
+        <div class="modal-header p-0 bg-dark">
+          <div class="col text-center">
+            <h3 class="mx-0 my-2 text-white text-font-base">New Recipient</h3>
+          </div>
+        </div>
+        <div class="modal-body">
+
+          <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Close');ngOnInit();">CLOSE</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</section>

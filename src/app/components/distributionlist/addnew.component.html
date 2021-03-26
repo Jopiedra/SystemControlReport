@@ -1,0 +1,70 @@
+<LoadingPage *ngIf="loading"></LoadingPage>
+<div >
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Report Name</mat-label>
+    <mat-select [formControl]="RPTIDForm" required>
+      <mat-option *ngFor="let item of ReportList" [value]='item.RPTID'>{{item.FileName}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="RPTIDForm.hasError('required')">You must select a value</mat-error>
+  </mat-form-field>
+  <!-- <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Direct Senders</mat-label>
+    <mat-select formControlName="RecipientsDirect" multiple>
+        <mat-option *ngFor="let item of RecipientList" [value]="item.RecipientID">{{item.FullName}}</mat-option>
+      </mat-select>
+  </mat-form-field> -->
+  <div class="mb-3">
+    <label class="form-label font-weight-bold">Direct Senders</label>
+    <nz-select nzMode="tags" 
+                 nzPlaceHolder="Tag Mode" 
+                 [nzMaxTagCount]="3" 
+                 [nzMaxTagPlaceholder]="tagPlaceHolder"
+                 [(ngModel)]="RecipientsDirect"
+                 class="w-100">
+        <nz-option *ngFor="let option of RecipientList" [nzLabel]="option.FullName" [nzValue]="option.RecipientID">
+        </nz-option>
+      </nz-select>
+      <ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected </ng-template>
+  </div>  
+  <div class="mb-3">
+    <label class="form-label font-weight-bold">CC Senders</label>
+    <nz-select nzMode="tags" 
+                 nzPlaceHolder="Tag Mode" 
+                 [nzMaxTagCount]="3" 
+                 [nzMaxTagPlaceholder]="tagPlaceHolder"
+                 [(ngModel)]="RecipientsCC"
+                 class="w-100">
+        <nz-option *ngFor="let option of RecipientList" [nzLabel]="option.FullName" [nzValue]="option.RecipientID">
+        </nz-option>
+      </nz-select>
+      <ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected </ng-template>
+  </div>  
+  <div class="mb-3">
+    <label class="form-label font-weight-bold">BCC Senders</label>
+    <nz-select nzMode="tags" 
+                 nzPlaceHolder="Tag Mode" 
+                 [nzMaxTagCount]="3" 
+                 [nzMaxTagPlaceholder]="tagPlaceHolder"
+                 [(ngModel)]="RecipientsBCC"
+                 class="w-100">
+        <nz-option *ngFor="let option of RecipientList" [nzLabel]="option.FullName" [nzValue]="option.RecipientID">
+        </nz-option>
+      </nz-select>
+      <ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected </ng-template>
+  </div>  
+  <div class="form-group mb-3">
+    <label class="col text-danger label-alert text-font-base p-0" *ngIf="NoSenders">
+        <i class="material-icons align-middle">cancel</i>
+        Please enter at least one sender!
+    </label>   
+</div>
+  <div class="form-group m-0">
+    <div class="col-xs-6">
+      <button [disabled]="loading || NoSenders || RPTIDForm.invalid" ngbAutofocus
+        class="btn btn-outline-primary btn-block mx-0 mt-0 mb-2 py-2 rounded text-uppercase" (click)="onSubmit()">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        SAVE
+      </button>
+    </div>
+  </div>
+</div>

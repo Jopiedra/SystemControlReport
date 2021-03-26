@@ -151,7 +151,7 @@
           <div class="col-md-6">            
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Delivery Method</mat-label>
-              <input matInput [value]="Model.BusinessSponsor" readonly *ngIf="isRead">
+              <input matInput [value]="Model.DeliveryMethod" readonly *ngIf="isRead">
               <mat-select formControlName="DeliveryMethod" required *ngIf="!isRead">
                 <mat-option *ngFor="let item of DMList" [value]='item'>{{item}}</mat-option>                
               </mat-select>
@@ -199,8 +199,46 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Notes</mat-label>
-              <textarea matInput formControlName="Notes" rows="10" placeholder="In this section you can put any important detail" [readonly]="isRead"></textarea>              
+              <textarea matInput formControlName="Notes" rows="5" placeholder="In this section you can put any important detail" [readonly]="isRead"></textarea>              
             </mat-form-field>
+            <div class="form-group m-0" *ngIf="isRead && EmailFlag">
+              <div class="col-xs-6">
+                  <button class="btn btn-primary mx-0 mt-0 mb-2 py-2 rounded text-uppercase" type="button"
+                          (click)="open(ModalDLs)">
+                          <i class="fas fa-chart-network"></i> Distribution List
+                  </button>
+                  <ng-template #ModalDLs let-c="close" let-d="dismiss">
+                    <div class="modal-header p-0 bg-dark">
+                      <div class="col text-center">
+                        <h3 class="mx-0 my-2 text-white text-font-base">Distribution List</h3>
+                      </div>
+                    </div>
+                    <div class="modal-body">
+                      <DistributionListDetails [RPTID]="RPTID"></DistributionListDetails>
+                      <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                    </div>
+                  </ng-template>
+              </div>
+            </div>
+            <div class="form-group m-0" *ngIf="isRead">
+              <div class="col-xs-6">
+                  <button class="btn btn-primary mx-0 mt-0 mb-2 py-2 rounded text-uppercase" type="button"
+                          (click)="open(ModalTiggers)">
+                          <i class="far fa-clock"></i> Triggers
+                  </button>
+                  <ng-template #ModalTiggers let-c="close" let-d="dismiss">
+                    <div class="modal-header p-0 bg-dark">
+                      <div class="col text-center">
+                        <h3 class="mx-0 my-2 text-white text-font-base">Triggers</h3>
+                      </div>
+                    </div>
+                    <div class="modal-body">
+                      
+                      <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                    </div>
+                  </ng-template>
+              </div>
+            </div>            
           </div>
         </div>        
         <div class="row row-cols-2">

@@ -72,18 +72,18 @@ export class EmailDirectoryComponent implements OnInit {
     }
 
     ChangeStatus(ServerID: number) {
-        let ED = new EmailDirectory();
+        // let ED = new EmailDirectory();
 
-        ED.RecipientID = ServerID;
-        ED.ActionType = 'CHGST';
+        // ED.RecipientID = ServerID;
+        // ED.ActionType = 'CHGST';
 
-        this.EmailDirectorySVC.Upsert(ED,'UPDATE').subscribe(
-            res => {
-                if(res) {
-                    this.ngOnInit();
-                }
-            }
-        );
+        // this.EmailDirectorySVC.Upsert(ED,'UPDATE').subscribe(
+        //     res => {
+        //         if(res) {
+        //             this.ngOnInit();
+        //         }
+        //     }
+        // );
     }
 
     CleanSearch() {

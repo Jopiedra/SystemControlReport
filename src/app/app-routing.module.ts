@@ -16,6 +16,7 @@ import { SharedFoldersComponent } from './components/sharedfolders/sharedfolders
 import { SourcePathComponent } from './components/sourcepath/sourcepath.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ReportsUpsertComponent } from './components/reports/upsert.component';
+import { DistributionListComponent } from './components/distributionlist/distributionlist.component';
 
 const routes: Routes = [
 
@@ -43,8 +44,8 @@ const routes: Routes = [
   { path: 'Reports/Index', component: ReportsComponent, canActivate: [AuthGuard] },
   { path: 'Reports/:Type', component: ReportsUpsertComponent, canActivate: [AuthGuard] },
   { path: 'Reports/:Type/:RPTID', component: ReportsUpsertComponent, canActivate: [AuthGuard] },
-  { path: 'DLs', component: HomePageComponent, canActivate: [AuthGuard] },
-  { path: 'DLs/Index', component: HomePageComponent, canActivate: [AuthGuard] },
+  { path: 'DLs', component: DistributionListComponent, canActivate: [AuthGuard] },
+  { path: 'DLs/Index', component: DistributionListComponent, canActivate: [AuthGuard] },
   { path: 'Triggers', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'Triggers/Index', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'SourcePaths', component: SourcePathComponent, canActivate: [AuthGuard] },

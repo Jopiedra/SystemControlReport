@@ -22,7 +22,7 @@ import { EmailDirectoryService } from '../../services/emaildirectory.service';
 
 export class EmailDirectoryUpsertComponent implements OnInit {
 
-    public Model: EmailDirectory = new EmailDirectory();
+    public Model!: EmailDirectory;
     public Form!: FormGroup;
     public loading!: boolean;
     public isEdit!: boolean;

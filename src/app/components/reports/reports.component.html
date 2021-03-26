@@ -35,7 +35,7 @@
             <th class="align-middle text-center">RPT_ID</th>
             <th class="align-middle text-center">File Name</th>
             <th class="align-middle text-center">Execution Status</th>
-            <th class="align-middle text-center">Status</th>
+            <th class="align-middle text-center" style="width: 100px !important;">Status</th>
             <th colspan="2" class="align-middle text-center"></th>
           </tr>
         </thead>
@@ -88,7 +88,41 @@
                 <i class="fas fa-times-circle fa-15x"></i> Disable
               </a>
             </td>
-            
+            <td class="align-middle text-center">
+              <a (click)="open(ModalTrigger)" nz-tooltip nzTooltipTitle="Triggers" nzTooltipColor="Blue"
+                nzTooltipPlacement="top">
+                <i class="far fa-clock fa-15x"></i>
+              </a>
+              <ng-template #ModalTrigger let-c="close" let-d="dismiss">
+                <div class="modal-header p-0 bg-dark">
+                  <div class="col text-center">
+                    <h3 class="mx-0 my-2 text-white text-font-base">{{item.FileName}}</h3>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  
+                  <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                </div>
+              </ng-template> 
+            </td>
+            <td class="align-middle text-center" *ngIf="item.DLFlag">
+              <a (click)="open(ModalDL)" nz-tooltip nzTooltipTitle="Distribution List" nzTooltipColor="Blue"
+                nzTooltipPlacement="top">
+                <i class="far fa-envelope fa-15x"></i>
+              </a>
+              <ng-template #ModalDL let-c="close" let-d="dismiss">
+                <div class="modal-header p-0 bg-dark">
+                  <div class="col text-center">
+                    <h3 class="mx-0 my-2 text-white text-font-base">{{item.FileName}}</h3>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <DistributionListDetails [RPTID]="item.RPTID"></DistributionListDetails>
+                  <button type="button" class="btn btn-outline-dark btn-block" (click)="c('Cerrar')">CLOSE</button>
+                </div>
+              </ng-template> 
+            </td>
+            <td *ngIf="!item.DLFlag"></td>
           </tr>
         </tbody>
       </table>

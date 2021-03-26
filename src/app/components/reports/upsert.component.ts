@@ -167,7 +167,7 @@ export class ReportsUpsertComponent implements OnInit, OnDestroy {
         if (this.isEdit || this.isRead) {
             this.ReportsSVC.Details(this.RPTID).subscribe(res => {
                 this.Model = res;
-                console.log(res);
+                //console.log(res);
                 this.Form.controls.FileName.setValue(this.Model.FileName);
                 this.Form.controls.LogFileName.setValue(this.Model.LogsFileName);
                 this.Form.controls.EmailSubjectName.setValue(this.Model.EmailSubjectName);
